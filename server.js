@@ -36,6 +36,12 @@ app.get("/api/timestamp/:date_string?", (req, res) => {
     date = isValidNumber(date_string) ? new Date(parseInt(date_string, 10)) : new Date(date_string);
   }
   
+  if (date.toString() === 'Invalid Date') {
+    res.json({
+      error: 'Invalid Date'
+    });
+    return;
+  }
   res.json({ 
     unix: date.getTime(),
     utc: date.toUTCString()
